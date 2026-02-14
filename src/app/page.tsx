@@ -176,7 +176,7 @@ export default function Home() {
         {/* Live Import Button */}
         <button
           onClick={() => setShowModal(true)}
-          className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-green-700 to-green-600 hover:from-green-800 hover:to-green-700 text-white rounded-2xl font-semibold shadow-lg shadow-green-600/25 transition-all duration-200 active:scale-[0.98]"
+          className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-red-700 to-red-600 hover:from-red-800 hover:to-red-700 text-white rounded-2xl font-semibold shadow-lg shadow-red-600/25 transition-all duration-200 active:scale-[0.98]"
         >
           <Wifi className="w-5 h-5" />
           Load from Live Match
@@ -472,8 +472,8 @@ export default function Home() {
                       <div
                         key={i}
                         className={`flex items-center justify-between p-3.5 rounded-xl border transition-all ${isCurrentPar
-                            ? 'bg-green-50 border-green-200'
-                            : 'bg-gray-50 border-gray-100 hover:bg-gray-100/80'
+                          ? 'bg-green-50 border-green-200'
+                          : 'bg-gray-50 border-gray-100 hover:bg-gray-100/80'
                           }`}
                       >
                         <div className="flex-1 min-w-0">
