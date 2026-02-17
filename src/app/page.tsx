@@ -510,10 +510,36 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="max-w-2xl mx-auto px-4 py-6 text-center">
+      <footer className="max-w-2xl mx-auto px-4 py-8 text-center space-y-4">
         <p className="text-xs text-gray-400">
           DLS Standard Edition • For reference only — not for official use
         </p>
+
+        <div className="flex items-center justify-center gap-3 pt-4 border-t border-gray-100">
+          <a
+            href="https://github.com/muhammadAzeem0x000"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-3 px-4 py-2 bg-white rounded-full border border-gray-100 shadow-sm hover:shadow-md hover:border-green-200 transition-all duration-300"
+          >
+            <div className="relative">
+              <img
+                src="https://github.com/muhammadAzeem0x000.png"
+                alt="M. Azeem"
+                className="w-8 h-8 rounded-full border-2 border-white shadow-sm group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 border-2 border-white rounded-full animate-pulse" />
+            </div>
+            <div className="text-left">
+              <p className="text-[10px] uppercase tracking-wider font-semibold text-gray-400 group-hover:text-green-600 transition-colors">
+                Developed by
+              </p>
+              <p className="text-sm font-bold text-gray-800 group-hover:text-green-700 transition-colors">
+                M. Azeem
+              </p>
+            </div>
+          </a>
+        </div>
       </footer>
     </div>
   );
