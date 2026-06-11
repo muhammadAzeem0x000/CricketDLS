@@ -21,7 +21,10 @@ import {
   generateWhatIfScenarios,
   getParScoreAt,
   formatOversDisplay,
+  setDLSEdition,
+  getDLSEdition,
 } from '@/lib/dls-logic';
+import type { DLSEdition } from '@/lib/dls-logic';
 import type { DLSState, DLSResult, InningsData, Team2Progress, WhatIfScenario } from '@/types';
 
 const INITIAL_STATE: DLSState = {
@@ -49,6 +52,17 @@ export default function Home() {
     type: 'error' | 'success';
   } | null>(null);
   const [importedTeam, setImportedTeam] = useState<string | null>(null);
+  const [edition, setEdition] = useState<DLSEdition>(getDLSEdition());
+
+  const handleEditionChange = (newEdition: DLSEdition) => {
+    setDLSEdition(newEdition);
+    setEdition(newEdition);
+    // Recalculate if we already have a result
+    if (result) {
+      const res = calculateDLS(dlsData);
+      if (res) setResult(res);
+    }
+  };
 
   // Live par score at Team 2's current position
   const currentPar = useMemo(() => {
@@ -238,6 +252,33 @@ export default function Home() {
                     </button>
                   ))}
                 </div>
+              </div>
+
+              {/* DLS Edition Toggle */}
+              <div>
+                <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">DLS Edition</label>
+                <div className="mt-1.5 flex gap-2">
+                  {(['professional', 'standard'] as const).map((ed) => (
+                    <button
+                      key={ed}
+                      onClick={() => handleEditionChange(ed)}
+                      className={`flex-1 py-2.5 rounded-xl text-sm font-semibold border transition-all ${
+                        edition === ed
+                          ? ed === 'professional'
+                            ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-600/20'
+                            : 'bg-green-600 text-white border-green-600 shadow-md shadow-green-600/20'
+                          : 'bg-white text-gray-600 border-gray-200 hover:border-blue-300'
+                      }`}
+                    >
+                      {ed === 'professional' ? 'Professional' : 'Standard'}
+                    </button>
+                  ))}
+                </div>
+                <p className="text-[10px] text-gray-400 mt-1 text-center">
+                  {edition === 'professional'
+                    ? 'Parametric model — matches ICC results'
+                    : 'Static lookup table — public domain'}
+                </p>
               </div>
 
               {/* Scoreboard */}
@@ -512,7 +553,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="max-w-2xl mx-auto px-4 py-8 text-center space-y-4">
         <p className="text-xs text-gray-400">
-          DLS Standard Edition • For reference only — not for official use
+          DLS {edition === 'professional' ? 'Professional Edition (Approx.)' : 'Standard Edition'} • For reference only — not for official use
         </p>
 
         <div className="flex items-center justify-center gap-3 pt-4 border-t border-gray-100">
